@@ -9,7 +9,10 @@ public class luzScript : MonoBehaviour {
 	///</sumary>
 	public int espejo;
 	public float luzVel = 1f;
-	static public GameObject luz;
+	[HideInInspector]
+	public GameObject luz;
+	[HideInInspector]
+	public lampScript lamp;
 	//public GameObject Luz;
 	Vector3 largoLuz = Vector3.up+Vector3.forward;
 	//SpriteRenderer sprite;
@@ -30,6 +33,7 @@ public class luzScript : MonoBehaviour {
 	RaycastHit2D[] hits = new RaycastHit2D[5];
 	// Use this for initialization
 	void Start () {
+		lamp.luces.AddLast(this.gameObject);
 		filtro.useLayerMask = true;
 		filtro.SetLayerMask(LayerMask.GetMask("Planos"));
 	}
@@ -45,21 +49,42 @@ public class luzScript : MonoBehaviour {
 		{
 			if(espejo == hits[ii].collider.GetInstanceID())
 			{
+				print("continue");
 				continue;
 			}
-			switch(hits[ii].transform.tag)
+			switch(hits[ii].collider.tag)
 			{
 				case "Espe":
 					//angle = Vector2.Angle(transform.rotation*Vector2.right, -hits[ii].normal);
-					if(Quaternion.Angle(transform.rotation, hits[ii].transform.rotation) > 90f)
+					print("espe");
+					/* if(Quaternion.Angle(transform.rotation, hits[ii].transform.rotation) > 90f)
 					{
 						ricoVector = Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal);
 						ricochetAngle = Quaternion.Euler(0f,0f, Mathf.Atan2(ricoVector.y,ricoVector.x)*Mathf.Rad2Deg);
 						Instantiate(luz,hits[ii].point, ricochetAngle).GetComponent<luzScript>().espejo = hits[ii].collider.GetInstanceID();
-					}
+					}*/
+					ricoVector = Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal);
+					print(hits[ii].normal);
+					print(transform.rotation*Vector2.right);
+					print(Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal));
+					//print(Mathf.Atan2(ricoVector.y,ricoVector.x)*Mathf.Rad2Deg);
+					ricochetAngle = Quaternion.Euler(0f,0f, Mathf.Atan2(ricoVector.y,ricoVector.x)*Mathf.Rad2Deg);
+					//Instantiate(luz,hits[ii].point, ricochetAngle).GetComponent<luzScript>().espejo = hits[ii].collider.GetInstanceID();
+					luzScript luzScr = Instantiate(luz,hits[ii].point, ricochetAngle).GetComponent<luzScript>();
+					luzScr.espejo = hits[ii].collider.GetInstanceID();
+					luzScr.luz = this.luz;
+					luzScr.lamp = this.lamp;
+					
+					
+					//gameManaScript.gameMana.mueve(transform.position, hits[ii].point);
 					break;
 				case "Opac":
-
+					print("opac");
+					gameManaScript.gameMana.rreset();
+					//Destroy(this.gameObject);
+					break;
+				default:
+					print("default");
 					break;
 			}
 			

@@ -53,10 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\creaBordesScript.cs" />
      <Compile Include="Assets\Inicio\Scripts\cambioScript.cs" />
+     <Compile Include="Assets\NivelPruebas\Scripts\bordesScript.cs" />
+     <Compile Include="Assets\NivelPruebas\Scripts\gameManaScript.cs" />
      <Compile Include="Assets\NivelPruebas\Scripts\giraScript.cs" />
      <Compile Include="Assets\NivelPruebas\Scripts\lampScript.cs" />
      <Compile Include="Assets\NivelPruebas\Scripts\luzScript.cs" />
+     <Compile Include="Assets\NivelPruebas\Scripts\mueveCamaraScript.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/otreblan/Documents/GitHub/espejos/Espejos/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
