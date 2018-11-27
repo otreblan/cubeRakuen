@@ -40,6 +40,8 @@ public class luzScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		gameManaScript.gameMana.setDistance(transform.position.y+(transform.rotation*transform.localScale/10f).y-lamp.transform.position.y);
+
 		largoLuz.x += Time.deltaTime* luzVel;
 		
 		transform.localScale = largoLuz;//para obtener el largo en Unity Units hay que dividirlo entre 10
@@ -56,7 +58,7 @@ public class luzScript : MonoBehaviour {
 			{
 				case "Espe":
 					//angle = Vector2.Angle(transform.rotation*Vector2.right, -hits[ii].normal);
-					print("espe");
+					//print("espe");
 					/* if(Quaternion.Angle(transform.rotation, hits[ii].transform.rotation) > 90f)
 					{
 						ricoVector = Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal);
@@ -64,9 +66,9 @@ public class luzScript : MonoBehaviour {
 						Instantiate(luz,hits[ii].point, ricochetAngle).GetComponent<luzScript>().espejo = hits[ii].collider.GetInstanceID();
 					}*/
 					ricoVector = Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal);
-					print(hits[ii].normal);
-					print(transform.rotation*Vector2.right);
-					print(Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal));
+					//print(hits[ii].normal);
+					//print(transform.rotation*Vector2.right);
+					//print(Vector2.Reflect(transform.rotation*Vector2.right, hits[ii].normal));
 					//print(Mathf.Atan2(ricoVector.y,ricoVector.x)*Mathf.Rad2Deg);
 					ricochetAngle = Quaternion.Euler(0f,0f, Mathf.Atan2(ricoVector.y,ricoVector.x)*Mathf.Rad2Deg);
 					//Instantiate(luz,hits[ii].point, ricochetAngle).GetComponent<luzScript>().espejo = hits[ii].collider.GetInstanceID();
@@ -76,7 +78,7 @@ public class luzScript : MonoBehaviour {
 					luzScr.lamp = this.lamp;
 					
 					
-					//gameManaScript.gameMana.mueve(transform.position, hits[ii].point);
+					gameManaScript.gameMana.mueve(transform.position, hits[ii].point);
 					break;
 				case "Opac":
 					print("opac");

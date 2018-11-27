@@ -15,11 +15,12 @@ public class bordesScript : MonoBehaviour {
 		camara = Camera.main;
 		colli = GetComponent<EdgeCollider2D>();
 		camaraTransform = camara.transform;
-		edges = new Vector2[4]{
+		edges = new Vector2[5]{
 			camara.ViewportToWorldPoint(new Vector2(0f,1f)),
 			camara.ViewportToWorldPoint(new Vector2(0f,0f)),
 			camara.ViewportToWorldPoint(new Vector2(1f,0f)),
-			camara.ViewportToWorldPoint(new Vector2(1f,1f))
+			camara.ViewportToWorldPoint(new Vector2(1f,1f)),
+			camara.ViewportToWorldPoint(new Vector2(0f,1f)),
 		};
 		for(int ii = 0; ii < edges.Length; ii++)
 		{
